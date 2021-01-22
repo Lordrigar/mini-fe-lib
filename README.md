@@ -14,3 +14,4 @@ TODO:
 - clean index.js to import components and all even listeners
 - clean Home.js and add button creation etc inside class
 - create function components for elements like button etc and import them to Home
+- make state inside Store - private
