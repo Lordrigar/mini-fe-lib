@@ -1,21 +1,18 @@
-const homeEvent = new Event('UPDATED_CHANGE_STORE');
+import reducers from './reducers';
+
+let state = {};
 
 const Store = {
-  state: {},
   dispatch: function (action, payload) {
-    switch (action) {
-      case 'CHANGE_STORE':
-        this.setState(payload);
-        document.dispatchEvent(homeEvent);
-    }
+    reducers(action, payload);
   },
 
   setState: function (newState) {
-    this.state = { ...this.state, ...newState };
+    state = { ...state, ...newState };
   },
 
-  getStore: function () {
-    return this.state;
+  getState: function () {
+    return state;
   },
 };
 

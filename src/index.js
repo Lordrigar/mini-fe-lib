@@ -1,13 +1,12 @@
-import Home from './app/views/Home';
+import { home } from './app/services/classInstances';
+import { eventListeners, domListeners } from './app/services/eventListeners';
 
-const root = document.querySelector('.root');
-
-const home = new Home();
+// Register Event Listeners
+eventListeners();
+domListeners();
 
 home.setState('list', { id: 1, name: 'Nerdy' });
 
-root.innerHTML = home.render();
-
-document.addEventListener('UPDATED_CHANGE_STORE', () => {
-  root.innerHTML = home.render();
-});
+// Render App
+const root = document.querySelector('.root');
+root.innerHTML = home.render(root);

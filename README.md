@@ -9,8 +9,19 @@ App features:
 
 TODO:
 
-- cleanup store and methods
 - add checks for methods to check the right arguments are passed
-- clean index.js to import components and all even listeners
-- clean Home.js and add button creation etc inside class
 - create function components for elements like button etc and import them to Home
+- rewrite dispatcher and reduce one layer
+- go back to createElement :(
+
+// dispatcher
+
+- click event -> dispatch Event
+- wrapper() przejmuje Eventa -> new Event -> dispatch() -> document.dispatchEvent
+
+// reducer
+
+- register reducer, mapa listenerow jako manager (klasa/obiekt state controller)
+- manager.regReducer(action, cb()) to nasluchuje (wewnatrz komponentu/serwisu)
+- regReducer (ma mape listenerow) [action: [cb, cb]] -> document.addEventListener
+- manager nasluchuje na regReducer i przekazuje przez wszystkie callbacki i zwraca nowy state

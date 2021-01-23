@@ -1,13 +1,32 @@
 class AbstractComponent {
   constructor(props) {
-    this.state = {};
+    this._state = {};
+    this._renderElement = null;
+  }
+
+  setRenderElement(element = null) {
+    if (element) {
+      this._renderElement = element;
+    }
+  }
+
+  getRenderElement() {
+    return this._renderElement;
   }
 
   setState(target, value) {
-    this.state = { ...this.state, [target]: value };
+    this._state = { ...this._state, [target]: value };
+
+    if (this._renderElement) {
+      this._renderElement.innerHTML = this.render();
+    }
   }
 
-  render() {
+  getState() {
+    return this._state;
+  }
+
+  render(element = null) {
     return ``;
   }
 }
