@@ -11,6 +11,7 @@ TODO:
 
 - add checks for methods to check the right arguments are passed
 - create function components for elements like button etc and import them to Home
+<<<<<<< HEAD
 - rewrite dispatcher and reduce one layer
 - go back to createElement :(
 
@@ -25,3 +26,6 @@ TODO:
 - manager.regReducer(action, cb()) to nasluchuje (wewnatrz komponentu/serwisu)
 - regReducer (ma mape listenerow) [action: [cb, cb]] -> document.addEventListener
 - manager nasluchuje na regReducer i przekazuje przez wszystkie callbacki i zwraca nowy state
+=======
+- make state inside Store - private
+>>>>>>> 4a73f68983dbfdaf5be3ab6d8806786a6d2115cb
