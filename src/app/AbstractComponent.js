@@ -1,33 +1,21 @@
 class AbstractComponent {
-  constructor(props) {
-    this._state = {};
-    this._renderElement = null;
-  }
-
-  setRenderElement(element = null) {
-    if (element) {
-      this._renderElement = element;
-    }
-  }
-
-  getRenderElement() {
-    return this._renderElement;
+  constructor({ store, renderElement }) {
+    this.store = store;
+    this.state = {};
+    this.renderElement = renderElement;
+    this.render = this.render || function () {};
   }
 
   setState(target, value) {
-    this._state = { ...this._state, [target]: value };
+    this.state = { ...this.state, [target]: value };
 
-    if (this._renderElement) {
-      this._renderElement.innerHTML = this.render();
+    if (this.renderElement) {
+      this.renderElement.innerHTML = this.render();
     }
   }
 
   getState() {
-    return this._state;
-  }
-
-  render(element = null) {
-    return ``;
+    return this.state;
   }
 }
 

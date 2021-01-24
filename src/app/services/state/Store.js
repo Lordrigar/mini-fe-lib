@@ -1,19 +1,35 @@
-import reducers from './reducers';
+import * as actions from './actions';
+const storeActions = Object.keys(actions);
 
-let state = {};
+class Store {
+  constructor() {
+    this.state = {};
+    this.actions = storeActions;
+  }
 
-const Store = {
-  dispatch: function (action, payload) {
-    reducers(action, payload);
-  },
+  setState(newState) {
+    this.state = { ...this.state, ...newState };
+  }
 
-  setState: function (newState) {
-    state = { ...state, ...newState };
-  },
+  getState() {
+    return this.state;
+  }
 
-  getState: function () {
-    return state;
-  },
-};
+  registerReducers() {
+    document.addEventListener(
+      'STATE_CHANGED',
+      ({ detail: { action, ...payload } }) => {
+        if (this.actions.includes(action)) {
+          const { eventName, newState } = actions[action](this, payload);
+
+          const event = new CustomEvent(eventName, {
+            detail: { newState },
+          });
+          document.dispatchEvent(event);
+        }
+      }
+    );
+  }
+}
 
 export default Store;
