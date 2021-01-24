@@ -1,10 +1,8 @@
-import * as actions from './actions';
-const storeActions = Object.keys(actions);
-
 class Store {
-  constructor() {
+  constructor({ actions, mutations }) {
     this.state = {};
-    this.actions = storeActions;
+    this.actions = actions;
+    this.mutations = mutations;
   }
 
   setState(newState) {
@@ -15,17 +13,30 @@ class Store {
     return this.state;
   }
 
+  dispatch(actionCb, payload, action) {
+    if (typeof actionCb !== 'function') {
+      throw new Error('Action has to be a function');
+    }
+    actionCb(this, payload, action);
+  }
+
+  commit(mutationName, payload, action) {
+    if (this.mutations.hasOwnProperty(mutationName)) {
+      const newState = this.mutations[mutationName](this.state, payload);
+
+      const event = new CustomEvent(`DONE_${action}`, {
+        detail: { newState },
+      });
+      document.dispatchEvent(event);
+    }
+  }
+
   registerReducers() {
     document.addEventListener(
       'STATE_CHANGED',
       ({ detail: { action, ...payload } }) => {
-        if (this.actions.includes(action)) {
-          const { eventName, newState } = actions[action](this, payload);
-
-          const event = new CustomEvent(eventName, {
-            detail: { newState },
-          });
-          document.dispatchEvent(event);
+        if (this.actions.hasOwnProperty(action)) {
+          this.dispatch(this.actions[action], payload, action);
         }
       }
     );

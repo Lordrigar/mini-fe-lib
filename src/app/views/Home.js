@@ -9,24 +9,27 @@ export default class Home extends AbstractComponent {
       renderElement: document.querySelector('.root'),
     });
 
-    document.addEventListener('UPDATE_HOME', e => {
-      console.log('received update for Home');
-      this.store = e.detail.newState;
-      this.render();
-    });
+    document.addEventListener('DONE_CHANGE_STORE', e => this.handleRender(e));
+  }
 
+  handleRender(e) {
+    this.store = e.detail.newState;
+    this.render();
+  }
+
+  handleClick() {
+    const st = store.getState();
+    const counter = st.counter || 0;
+    eventWrapper('CHANGE_STORE', { counter: counter + 1 });
     const button = document.getElementById('changeState');
 
-    button.addEventListener('click', e => {
-      const st = store.getState();
-      const counter = st.counter || 0;
-      eventWrapper('CHANGE_STORE', { counter: counter + 1 });
-    });
+    button.removeEventListener('click', this.handleClick);
   }
 
   render() {
-    console.log('render called');
     const state = this.getState();
+    const button = document.getElementById('changeState');
+    button.addEventListener('click', this.handleClick);
 
     this.renderElement.innerHTML = `
       Hello World ${state?.list?.id} and name is ${state?.list?.name}

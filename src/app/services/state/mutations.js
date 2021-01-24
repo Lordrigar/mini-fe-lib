@@ -1,7 +1,7 @@
-const incrementCounter = (state, payload) => {
-  state.counter = payload.counter;
+export default {
+  incrementCounter(state, payload) {
+    state.counter = payload.counter;
 
-  return state;
+    return state;
+  },
 };
-
-export { incrementCounter };
