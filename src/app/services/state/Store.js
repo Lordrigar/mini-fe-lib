@@ -1,3 +1,5 @@
+import eventWrapper from './eventWrapper';
+
 class Store {
   constructor({ actions, mutations }) {
     this.state = {};
@@ -13,11 +15,15 @@ class Store {
     return this.state;
   }
 
-  dispatch(actionCb, payload, action) {
+  handle(actionCb, payload, action) {
     if (typeof actionCb !== 'function') {
       throw new Error('Action has to be a function');
     }
     actionCb(this, payload, action);
+  }
+
+  dispatch(action, payload) {
+    eventWrapper(action, payload);
   }
 
   commit(mutationName, payload, action) {
@@ -36,7 +42,7 @@ class Store {
       'STATE_CHANGED',
       ({ detail: { action, ...payload } }) => {
         if (this.actions.hasOwnProperty(action)) {
-          this.dispatch(this.actions[action], payload, action);
+          this.handle(this.actions[action], payload, action);
         }
       }
     );

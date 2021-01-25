@@ -1,6 +1,5 @@
 import AbstractComponent from './../AbstractComponent';
 import { store } from './../services/classInstances';
-import eventWrapper from './../services/state/eventWrapper';
 
 export default class Home extends AbstractComponent {
   constructor() {
@@ -8,42 +7,30 @@ export default class Home extends AbstractComponent {
       store,
       renderElement: document.querySelector('.root'),
     });
-
-    const newButton = document.getElementById('newButton');
-    newButton.addEventListener('click', () => {
-      this.renderElement.innerHTML = '';
-    });
   }
 
   componentDidUnmount() {
-    console.log('unmounted');
+    document.removeEventListener('DONE_CHANGE_STORE', this.handleStateUpdate);
   }
 
   componentDidMount() {
-    document.addEventListener('DONE_CHANGE_STORE', e => {
-      this.store = e.detail.newState;
-      this.render();
-    });
-    console.log('mounted');
-  }
+    document.addEventListener('DONE_CHANGE_STORE', this.handleStateUpdate);
 
-  handleClick() {
-    const st = store.getState();
-    const counter = st.counter || 0;
-    eventWrapper('CHANGE_STORE', { counter: counter + 1 });
     const button = document.getElementById('changeState');
-
-    button.removeEventListener('click', this.handleClick);
+    button.addEventListener('click', this.handleClick);
   }
+
+  handleClick = () => {
+    const state = this.store.getState();
+    const counter = state.counter || 0;
+    this.store.dispatch('CHANGE_STORE', { counter: counter + 1 });
+  };
 
   render() {
     const state = this.getState();
 
-    const button = document.getElementById('changeState');
-    button.addEventListener('click', this.handleClick);
-
     this.renderElement.innerHTML = `
-      <div>This is global state: ${this.store?.counter || 0}</div>
+      <div>This is global state: ${this.store?.state?.counter || 0}</div>
       <p>Hello World ${state?.list?.id} and name is ${state?.list?.name}</p>
     `;
   }

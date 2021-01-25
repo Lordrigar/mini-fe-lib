@@ -35,6 +35,11 @@ class AbstractComponent {
   getState() {
     return this.state;
   }
+
+  handleStateUpdate = e => {
+    this.store.state = e.detail.newState;
+    this.render();
+  };
 }
 
 export default AbstractComponent;
