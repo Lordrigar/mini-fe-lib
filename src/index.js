@@ -1,4 +1,4 @@
-import { home, store } from './app/services/classInstances';
+import { instantiateClasses, home, store } from './app/services/classInstances';
 
 // Register Event Listeners
 store.registerReducers();

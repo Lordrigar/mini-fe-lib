@@ -9,12 +9,22 @@ export default class Home extends AbstractComponent {
       renderElement: document.querySelector('.root'),
     });
 
-    document.addEventListener('DONE_CHANGE_STORE', e => this.handleRender(e));
+    const newButton = document.getElementById('newButton');
+    newButton.addEventListener('click', () => {
+      this.renderElement.innerHTML = '';
+    });
   }
 
-  handleRender(e) {
-    this.store = e.detail.newState;
-    this.render();
+  componentDidUnmount() {
+    console.log('unmounted');
+  }
+
+  componentDidMount() {
+    document.addEventListener('DONE_CHANGE_STORE', e => {
+      this.store = e.detail.newState;
+      this.render();
+    });
+    console.log('mounted');
   }
 
   handleClick() {
@@ -28,12 +38,13 @@ export default class Home extends AbstractComponent {
 
   render() {
     const state = this.getState();
+
     const button = document.getElementById('changeState');
     button.addEventListener('click', this.handleClick);
 
     this.renderElement.innerHTML = `
-      Hello World ${state?.list?.id} and name is ${state?.list?.name}
-      <p>This is global state: ${this.store?.counter || 0}</p>
+      <div>This is global state: ${this.store?.counter || 0}</div>
+      <p>Hello World ${state?.list?.id} and name is ${state?.list?.name}</p>
     `;
   }
 }
