@@ -1,4 +1,5 @@
 import Home from './../views/Home';
+import About from './../views/About';
 import Store from './state/Store';
 import actions from './state/actions';
 import mutations from './state/mutations';
@@ -11,5 +12,6 @@ const store = new Store({
 });
 
 const home = new Home({ store });
+const about = new About({ store });
 
-export { home, store };
+export { home, about, store };

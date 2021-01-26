@@ -22,5 +22,4 @@ npm run build
 
 TODO:
 
-- Create more components (to have more data to play with)
-- Build router
+- make router a function passed to some sort of data prop or just onclick on <a> tag. So I don't have to pass navs at the beginning, but rather import Router as function and assign it to anchor tag
