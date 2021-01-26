@@ -1,7 +1,12 @@
 export default {
   incrementCounter(state, payload) {
-    state.counter = payload.counter;
+    const { counter } = state;
+    const newState = {
+      ...state,
+      counter: counter + payload.counter,
+      newProp: 'xd',
+    };
 
-    return state;
+    return newState;
   },
 };

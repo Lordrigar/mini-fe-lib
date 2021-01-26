@@ -1,8 +1,8 @@
 import eventWrapper from './eventWrapper';
 
 class Store {
-  constructor({ actions, mutations }) {
-    this.state = {};
+  constructor({ actions, mutations, initialState }) {
+    this.state = initialState;
     this.actions = actions;
     this.mutations = mutations;
   }
@@ -29,9 +29,12 @@ class Store {
   commit(mutationName, payload, action) {
     if (this.mutations.hasOwnProperty(mutationName)) {
       const newState = this.mutations[mutationName](this.state, payload);
+      const oldState = this.getState();
 
-      const event = new CustomEvent(`DONE_${action}`, {
-        detail: { newState },
+      this.setState(newState);
+
+      const event = new CustomEvent(`STATE_UPDATED`, {
+        detail: { newState, oldState },
       });
       document.dispatchEvent(event);
     }
@@ -39,7 +42,7 @@ class Store {
 
   registerReducers() {
     document.addEventListener(
-      'STATE_CHANGED',
+      'UPDATE_STATE',
       ({ detail: { action, ...payload } }) => {
         if (this.actions.hasOwnProperty(action)) {
           this.handle(this.actions[action], payload, action);

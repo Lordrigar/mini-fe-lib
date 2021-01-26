@@ -1,5 +1,5 @@
 export default {
-  CHANGE_STORE(store, payload, action) {
+  INCREMENT_COUNTER(store, payload, action) {
     store.commit('incrementCounter', payload, action);
   },
 };
