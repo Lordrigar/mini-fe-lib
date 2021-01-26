@@ -9,21 +9,33 @@ export default class Home extends AbstractComponent {
     });
   }
 
-  componentDidMount() {
-    const button = document.getElementById('changeState');
-    button.addEventListener('click', this.handleClick);
-  }
-
   handleClick = () => {
     this.store.dispatch('INCREMENT_COUNTER', { counter: 1 });
   };
 
-  render() {
+  generateHTML() {
     const state = this.getState();
 
-    this.renderElement.innerHTML = `
-      <div>This is global state: ${this.store?.state?.counter || 0}</div>
-      <p>Hello World ${state?.list?.id} and name is ${state?.list?.name}</p>
-    `;
+    const button = document.createElement('button');
+    button.innerHTML = 'click meee';
+    button.id = 'changeState';
+    button.addEventListener('click', this.handleClick);
+
+    const div = document.createElement('div');
+    const textNode = document.createTextNode(
+      `This is global state: ${this.store?.state?.counter || 0}`
+    );
+    div.appendChild(textNode);
+
+    const p = document.createElement('p');
+    p.appendChild(
+      document.createTextNode(
+        `Hello World ${state?.list?.id} and name is ${state?.list?.name}`
+      )
+    );
+    div.appendChild(p);
+    div.appendChild(button);
+
+    return div;
   }
 }

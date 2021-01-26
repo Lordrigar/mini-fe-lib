@@ -26,7 +26,16 @@ class AbstractComponent {
     observer.observe(this.renderElement, { childList: true });
   }
 
-  render() {}
+  render() {
+    const fragment = this.generateHTML();
+
+    this.renderElement.children[0]?.replaceWith(fragment) ||
+      this.renderElement.appendChild(fragment);
+  }
+
+  generateHTML() {
+    return document.createElement('div');
+  }
 
   componentDidMount() {}
 
