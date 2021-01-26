@@ -54,7 +54,6 @@ class AbstractComponent {
       changedProps.length &&
       this.renderDependencies.some(rd => changedProps.includes(rd))
     ) {
-      console.log('I have to rerender');
       this.render();
     }
   };
