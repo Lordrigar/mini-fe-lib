@@ -1,4 +1,5 @@
 import AbstractComponent from './../AbstractComponent';
+import elementFactory from './../services/elementFactory';
 
 export default class Home extends AbstractComponent {
   constructor({ store, renderElement }) {
@@ -16,25 +17,20 @@ export default class Home extends AbstractComponent {
   generateHTML() {
     const state = this.getState();
 
-    const button = document.createElement('button');
-    button.innerHTML = 'click meee';
-    button.id = 'changeState';
-    button.addEventListener('click', this.handleClick);
-
-    const div = document.createElement('div');
-    const textNode = document.createTextNode(
-      `This is global state: ${this.store?.state?.counter || 0}`
-    );
-    div.appendChild(textNode);
-
-    const p = document.createElement('p');
-    p.appendChild(
-      document.createTextNode(
-        `Hello World ${state?.list?.id} and name is ${state?.list?.name}`
-      )
-    );
-    div.appendChild(p);
-    div.appendChild(button);
+    const div = elementFactory('div', {}, [
+      `This is global state: ${this.store?.state?.counter || 0}`,
+      elementFactory('p', {}, [
+        `Hello World ${state?.list?.id} and name is ${state?.list?.name}`,
+      ]),
+      elementFactory(
+        'button',
+        { id: 'changeState', class: 'p-7' },
+        ['click me :)'],
+        {
+          click: this.handleClick,
+        }
+      ),
+    ]);
 
     return div;
   }
