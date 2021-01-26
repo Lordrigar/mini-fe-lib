@@ -4,7 +4,21 @@ Started as an idea to create an app with component rendering and state managemen
 
 Right now features class components with scoped state, Global event based state, wrapper function for creating DOM elements, router.
 
-This is probably not secure enough for production use, but it was fun playing with it :)
+This is probably not secure enough for production use, but it was fun playing with it :).
+
+## Scripts
+
+Dev server
+
+```
+npm run start
+```
+
+Build
+
+```
+npm run build
+```
 
 TODO:
 
