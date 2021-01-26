@@ -24,7 +24,7 @@ export default class Home extends AbstractComponent {
       ]),
       elementFactory(
         'button',
-        { id: 'changeState', class: 'p-7' },
+        { id: 'changeState', class: 'p-2 m-2' },
         ['click me :)'],
         {
           click: this.handleClick,
