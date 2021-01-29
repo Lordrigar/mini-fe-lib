@@ -19,9 +19,3 @@ Build
 ```
 npm run build
 ```
-
-TODO:
-
-- make router a function passed to some sort of data prop or just onclick on <a> tag. So I don't have to pass navs at the beginning, but rather import Router as function and assign it to anchor tag
-- make it extract params and other parts like /posts/id/405040
-- move everything to folder lib, and leave src/app as a place to clone some project. So this can actually be used as a framework

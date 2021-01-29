@@ -1,5 +1,6 @@
-import AbstractComponent from './../AbstractComponent';
-import elementFactory from './../services/elementFactory';
+import AbstractComponent from './../../../lib/AbstractComponent';
+import elementFactory from './../../../lib/elementFactory';
+import route from './../../../lib/router';
 
 export default class Home extends AbstractComponent {
   constructor({ store, renderElement }) {
@@ -14,7 +15,8 @@ export default class Home extends AbstractComponent {
     this.store.dispatch('INCREMENT_COUNTER', { counter: 1 });
   };
 
-  generateHTML() {
+  generateHTML(params) {
+    console.log(params);
     const state = this.getState();
 
     const div = elementFactory('div', {}, [
@@ -30,6 +32,10 @@ export default class Home extends AbstractComponent {
           click: this.handleClick,
         }
       ),
+      elementFactory('a', { href: '/' }, ['Go Home'], {}, [route]),
+      elementFactory('a', { href: '/about?p=123&a=12' }, ['Go About'], {}, [
+        route,
+      ]),
     ]);
 
     return div;
