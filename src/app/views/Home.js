@@ -16,7 +16,6 @@ export default class Home extends AbstractComponent {
   };
 
   generateHTML(params) {
-    console.log(params);
     const state = this.getState();
 
     const div = elementFactory('div', {}, [
