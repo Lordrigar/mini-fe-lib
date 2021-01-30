@@ -14,8 +14,8 @@ export default class About extends AbstractComponent {
   generateHTML(params) {
     const div = elementFactory('div', {}, [
       'About page :)',
-      elementFactory('a', { href: '/' }, ['Go home'], {}, [route]),
-      elementFactory('a', { href: '/about' }, ['Go abput'], {}, [route]),
+      elementFactory('a', { href: '/' }, ['Go Home'], {}, [route]),
+      elementFactory('a', { href: '/about' }, ['Go About'], {}, [route]),
     ]);
 
     return div;

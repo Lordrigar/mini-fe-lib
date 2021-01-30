@@ -31,7 +31,3 @@ Build
 ```
 npm run build
 ```
-
-TODO:
-
-- Improve routing (maybe go for window.location or something)
