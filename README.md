@@ -8,15 +8,11 @@ Was actually fun to work on it, trying to understand state and how it all can wo
 
 ## Installation
 
-Always import instantiated classes, otherwise it gets slow (yeah, it's that good with performance :D).
-
-1. Import `registerReducers` from instantiated Store and call it in index.js
+1. Import `registerReducers` from Store and call it in index.js
 2. Import main component and call its `render()` method
-3. in `lib/classInstances.js` instantiate Store and other class components
-4. in `lib/router.js` provide routes and components to `returnRoutes()`, as mentioned beofre import those components from `classInstances`
+3. in `lib/router.js` provide routes and components to `returnRoutes()` and `returnDictionary()`
 
 The skeleton for it is provided with two sample components `Home` and `About`. Ideally follow that path to create new ones.
-Basically after adding new class component don't forget to register it in `classInstances` from which it will be exported and used further in the app + add it to `returnRoutes()`
 
 ## Folder structure and files explained
 
@@ -28,7 +24,6 @@ Basically after adding new class component don't forget to register it in `class
 - `lib/state/Store.js` - main logic for global state
 
 - `lib/AbstractComponent.js` - keeps the core functionality of class components, setting store, mount/unmount events and local state. Should be extender for all new class components
-- `lib/classInstances.js` - here instantiate all new class based components
 - `lib/elementFactory.js` - wrapper for document.createElement for quick UI construction
 - `lib/router.js` - define all routes there and use `route()` function as a callback to anchors (via elementFactory). Check example in file
 
@@ -37,7 +32,6 @@ Basically after adding new class component don't forget to register it in `class
 User is generally interested in modifying below files:
 
 - `lib/router.js`
-- `lib/classInstances.js`
 - `lib/state/actions.js`
 - `lib/state/mutations.js`
 - `lib/state/initialState.js`
@@ -55,3 +49,8 @@ Build
 ```
 npm run build
 ```
+
+TODO:
+
+- test class components instantiated in another class component (performance) - like build navbar with constructor for list items etc. If that works change documentation that not ALL class components have to be instantiated.
+- Play with more class components inside other components
