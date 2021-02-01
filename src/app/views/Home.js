@@ -1,8 +1,9 @@
 import AbstractComponent from './../../../lib/AbstractComponent';
 import elementFactory from './../../../lib/elementFactory';
 import route from './../../../lib/router';
+import store from './../../../lib/state/Store';
 
-export default class Home extends AbstractComponent {
+class Home extends AbstractComponent {
   constructor({ store, renderElement }) {
     super({
       store,
@@ -40,3 +41,6 @@ export default class Home extends AbstractComponent {
     return div;
   }
 }
+
+const home = new Home({ store });
+export default home;

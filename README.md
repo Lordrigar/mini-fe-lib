@@ -49,8 +49,3 @@ Build
 ```
 npm run build
 ```
-
-TODO:
-
-- test class components instantiated in another class component (performance) - like build navbar with constructor for list items etc. If that works change documentation that not ALL class components have to be instantiated.
-- Play with more class components inside other components
