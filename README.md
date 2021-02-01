@@ -1,4 +1,4 @@
-# Mini FE Framework
+# Mini FE Library
 
 I don't advice to use that for production, as this was created more as a fun, side project.
 
