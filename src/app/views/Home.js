@@ -33,9 +33,7 @@ class Home extends AbstractComponent {
         }
       ),
       elementFactory('a', { href: '/' }, ['Go Home'], {}, [route]),
-      elementFactory('a', { href: '/about?p=123&a=12' }, ['Go About'], {}, [
-        route,
-      ]),
+      elementFactory('a', { href: '/about' }, ['Go About'], {}, [route]),
     ]);
 
     return div;
